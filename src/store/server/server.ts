@@ -52,6 +52,7 @@ app
   .use(compress({ threshold: 0 })) // compressor
   .use(helmetMiddleware) // helmet
   .use(serve(`${publicDir}/content`, staticOptions))
+  // .use(serve(`${publicDir}/admin`, staticOptions))
   .use(serve(process.env.RAZZLE_PUBLIC_DIR, staticOptions))
   .use(mount("/assets", serve(`${themeDir}/assets`, staticOptions)))
   .use(
