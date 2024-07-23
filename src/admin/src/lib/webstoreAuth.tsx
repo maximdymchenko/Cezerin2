@@ -14,16 +14,16 @@ const getParameterByName = (name, url) => {
 }
 
 export const validateCurrentToken = () => {
-  if (location.pathname !== LOGIN_PATH) {
+  if (window.location.pathname !== LOGIN_PATH) {
     if (!isCurrentTokenValid()) {
-      location.replace(LOGIN_PATH)
+      window.location.replace(LOGIN_PATH)
     }
   }
 }
 
 export const checkTokenFromUrl = () => {
-  if (location.pathname === LOGIN_PATH) {
-    const token = getParameterByName("webstoretoken")
+  if (window.location.pathname === LOGIN_PATH) {
+    const token = getParameterByName("webstoretoken", "")
     if (token && token !== "") {
       const tokenData = parseJWT(token)
 
@@ -31,7 +31,7 @@ export const checkTokenFromUrl = () => {
         const expiration_date = tokenData.exp * 1000
         if (expiration_date > Date.now()) {
           saveToken({ token, email: tokenData.email, expiration_date })
-          location.replace(HOME_PATH)
+          window.location.replace(HOME_PATH)
         } else {
           alert(messages.tokenExpired)
         }
@@ -40,7 +40,7 @@ export const checkTokenFromUrl = () => {
       }
     } else {
       if (isCurrentTokenValid()) {
-        location.replace(HOME_PATH)
+        window.location.replace(HOME_PATH)
       }
     }
   }
@@ -63,7 +63,7 @@ const saveToken = data => {
 }
 
 export const isCurrentTokenValid = () => {
-  const expiration_date = localStorage.getItem("webstore_exp")
+  const expiration_date = parseInt(localStorage.getItem("webstore_exp"))
   return (
     localStorage.getItem("webstore_token") &&
     expiration_date &&

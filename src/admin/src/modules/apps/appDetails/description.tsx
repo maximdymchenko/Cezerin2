@@ -5,6 +5,7 @@ import React from "react"
 import style from "./style.sass"
 
 const AppDescription = ({
+  key,
   name,
   description,
   coverUrl,
@@ -13,14 +14,14 @@ const AppDescription = ({
 }) => (
   <div style={{ maxWidth: 720, width: "100%" }}>
     <Paper className="paper-box" zDepth={1}>
-      <div className={style.innerBox}>
+      <div className={style.innerBox.toString()}>
         <div className="row">
           <div className="col-xs-4">
-            <img src={coverUrl} alt={name} className={style.cover} />
+            <img src={coverUrl} alt={name} className={style.cover.toString()} />
           </div>
           <div className="col-xs-8">
-            <h1 className={style.title}>{name}</h1>
-            <div className={style.developer}>{developer}</div>
+            <h1 className={style.title.toString()}>{name}</h1>
+            <div className={style.developer.toString()}>{developer}</div>
             {/* {!enabled &&
               <RaisedButton label={messages.enable} primary disabled={loadingEnableDisable} onClick={enableService} />
             }
@@ -29,7 +30,7 @@ const AppDescription = ({
             } */}
           </div>
         </div>
-        <div className={style.description}>{parse(sanitize(description))}</div>
+        <div className={style.description.toString()}>{parse(sanitize(description))}</div>
       </div>
     </Paper>
   </div>

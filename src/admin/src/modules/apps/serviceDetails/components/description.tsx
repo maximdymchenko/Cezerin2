@@ -16,18 +16,18 @@ const ServiceDescription = ({
     return (
       <div style={{ maxWidth: 720, width: "100%" }}>
         <Paper className="paper-box" zDepth={1}>
-          <div className={style.innerBox}>
+          <div className={style.innerBox.toString()}>
             <div className="row">
               <div className="col-xs-4">
                 <img
                   src={service.cover_url}
                   alt={service.name}
-                  className={style.cover}
+                  className={style.cover.toString()}
                 />
               </div>
               <div className="col-xs-8">
-                <h1 className={style.title}>{service.name}</h1>
-                <div className={style.developer}>{service.developer.name}</div>
+                <h1 className={style.title.toString()}>{service.name}</h1>
+                <div className={style.developer.toString()}>{service.developer.name}</div>
                 {!service.enabled && (
                   <RaisedButton
                     label={messages.enable}
@@ -45,7 +45,7 @@ const ServiceDescription = ({
                 )}
               </div>
             </div>
-            <div className={style.description}>
+            <div className={style.description.toString()}>
               {parse(sanitize(service.description))}
             </div>
           </div>

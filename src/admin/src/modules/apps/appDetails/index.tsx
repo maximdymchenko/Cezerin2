@@ -15,7 +15,7 @@ const AppDetails = ({ match }) => {
       <AppDescription {...appDescription} />
       <div style={{ maxWidth: 720, width: "100%" }}>
         <Paper className="paper-box" zDepth={1}>
-          <div className={style.innerBox}>
+          <div className={style.innerBox.toString()}>
             <AppModule />
           </div>
         </Paper>
