@@ -5,24 +5,25 @@ const homePath = "/admin/"
 
 const getParameterByName = (name: string, url?: string) => {
   if (!url) url = window.location.href
-  name = name.replace(/[\[\]]/g, "\\$&")
+  name = name.replace(/[[\]]/g, "\\$&")
   const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url)
+  results = regex.exec(url)
+
   if (!results) return null
   if (!results[2]) return ""
   return decodeURIComponent(results[2].replace(/\+/g, " "))
 }
 
 export const validateCurrentToken = () => {
-  if (location.pathname !== loginPath) {
+  if (window.location.pathname !== loginPath) {
     if (!isCurrentTokenValid()) {
-      location.replace(loginPath)
+      window.location.replace(loginPath)
     }
   }
 }
 
 export const checkTokenFromUrl = () => {
-  if (location.pathname === loginPath) {
+  if (window.location.pathname === loginPath) {
     const token = getParameterByName("token")
     if (token && token !== "") {
       const tokenData = parseJWT(token)
@@ -31,7 +32,7 @@ export const checkTokenFromUrl = () => {
         const expiration_date = tokenData.exp * 1000
         if (expiration_date > Date.now()) {
           saveToken({ token, email: tokenData.email, expiration_date })
-          location.replace(homePath)
+          window.location.replace(homePath)
         } else {
           alert(messages.tokenExpired)
         }
@@ -40,7 +41,7 @@ export const checkTokenFromUrl = () => {
       }
     } else {
       if (isCurrentTokenValid()) {
-        location.replace(homePath)
+        window.location.replace(homePath)
       }
     }
   }
@@ -63,7 +64,7 @@ const saveToken = data => {
 }
 
 const isCurrentTokenValid = () => {
-  const expiration_date = localStorage.getItem("dashboard_exp")
+  const expiration_date = parseInt(localStorage.getItem("dashboard_exp"))
   return (
     localStorage.getItem("dashboard_token") &&
     expiration_date &&
@@ -78,5 +79,5 @@ export const removeToken = () => {
   localStorage.removeItem("webstore_token")
   localStorage.removeItem("webstore_email")
   localStorage.removeItem("webstore_exp")
-  location.replace(loginPath)
+  window.location.replace(loginPath)
 }

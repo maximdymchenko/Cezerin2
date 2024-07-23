@@ -9,9 +9,9 @@ const ServiceLogs = ({ logs }) => {
     const date = moment(action.date)
     const dateFormated = date.fromNow()
     return (
-      <div className={style.logsItem} key={index}>
-        <div className={style.logMessage}>{action.message}</div>
-        <div className={style.logDate}>{dateFormated}</div>
+      <div className={style.logsItem.toString()} key={index}>
+        <div className={style.logMessage.toString()}>{action.message}</div>
+        <div className={style.logDate.toString()}>{dateFormated}</div>
       </div>
     )
   })
@@ -22,7 +22,7 @@ const ServiceLogs = ({ logs }) => {
         {messages.serviceLogs}
       </div>
       <Paper className="paper-box" zDepth={1}>
-        <div className={style.logsBox}>{list}</div>
+        <div className={style.logsBox.toString()}>{list}</div>
       </Paper>
     </div>
   )

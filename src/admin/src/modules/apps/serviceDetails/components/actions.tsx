@@ -33,7 +33,7 @@ const ActionComponent: FC<props> = props => {
   }
 
   return (
-    <div className={style.action}>
+    <div className={style.action.toString()}>
       <div className="row middle-xs">
         <div className="col-xs-7" style={{ fontSize: "14px" }}>
           {action.description}
